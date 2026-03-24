@@ -1,60 +1,41 @@
 export default function Footer() {
   const columns = {
-    Product:  ["Overview", "Specifications", "Accessories", "Support"],
-    Company:  ["About Sennheiser", "Careers", "Press", "Blog"],
-    Legal:    ["Privacy Policy", "Terms of Use", "Cookies", "Warranty"],
+    Product: ["Overview", "Specifications", "Accessories", "Support"],
+    Company: ["About Sennheiser", "Careers", "Press"],
+    Legal:   ["Privacy Policy", "Terms of Use", "Warranty"],
   };
 
   return (
-    <footer
-      className="relative"
-      style={{ background: "var(--bg-primary)" }}
-    >
-      {/* Top gradient divider */}
+    <footer style={{ background: "var(--bg-primary)" }}>
+      {/* Divider */}
       <div
-        className="h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)" }}
+        className="mx-auto h-px"
+        style={{ maxWidth: "980px", background: "var(--border-subtle)" }}
       />
 
-      <div className="page-container pt-16 pb-10">
-        {/* Main grid: brand + 3 link columns */}
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-
-          {/* Brand column */}
-          <div className="col-span-2 sm:col-span-2 lg:col-span-1">
-            <p className="text-sm font-bold tracking-[0.12em] uppercase text-white/75">
-              Sennheiser
+      <div className="page-container pt-12 pb-8">
+        {/* Grid */}
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          {/* Brand */}
+          <div className="col-span-2 sm:col-span-1">
+            <p className="text-[13px] font-medium text-[#f5f5f7]">Sennheiser</p>
+            <p className="mt-2 max-w-[240px] text-[12px] leading-[1.5] text-[#6e6e73]">
+              Shaping the future of audio since 1945.
             </p>
-            <p className="mt-3 max-w-[260px] text-sm leading-relaxed text-white/25">
-              Shaping the future of audio since 1945. Precision German
-              engineering for musicians, creators, and audiophiles worldwide.
-            </p>
-            {/* Social icons */}
-            <div className="mt-6 flex items-center gap-3">
-              {(["𝕏", "IG", "YT", "LI"] as const).map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.07] bg-white/[0.02] text-[10px] font-bold text-white/30 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white/70"
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Link columns */}
           {Object.entries(columns).map(([category, links]) => (
-            <div key={category} className="col-span-1">
-              <p className="mb-4 text-[10px] font-bold tracking-[0.22em] uppercase text-white/35">
+            <div key={category}>
+              <p className="text-[11px] font-medium tracking-[0.04em] uppercase text-[#86868b] mb-3">
                 {category}
               </p>
-              <ul className="space-y-[10px]">
+              <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-white/28 transition-colors duration-300 hover:text-white/65"
+                      className="text-[12px] text-[#6e6e73] transition-colors duration-200 hover:text-[#a1a1a6]"
                     >
                       {link}
                     </a>
@@ -65,14 +46,13 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/[0.04] pt-7 sm:flex-row">
-          <p className="text-[11px] text-white/18">
-            © {new Date().getFullYear()} Sennheiser electronic GmbH &amp; Co. KG. All rights reserved.
-          </p>
-          <p className="text-[11px] text-white/15">
-            Made with ♪ in Wedemark, Germany
-          </p>
+        {/* Copyright */}
+        <div
+          className="mt-10 flex flex-col items-center justify-between gap-2 border-t pt-6 text-[11px] text-[#48484a] sm:flex-row"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
+          <p>© {new Date().getFullYear()} Sennheiser electronic GmbH &amp; Co. KG</p>
+          <p>Made in Wedemark, Germany</p>
         </div>
       </div>
     </footer>
