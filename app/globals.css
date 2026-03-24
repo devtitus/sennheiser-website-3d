@@ -242,11 +242,14 @@ p {
   inset: 0;
   z-index: 5;
   pointer-events: none;
+  /* Subtle full-screen tint for text legibility + soft edge darkening */
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 15%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, transparent 12%),
-    radial-gradient(ellipse 35% 100% at 0% 50%, rgba(0, 0, 0, 0.30) 0%, transparent 100%),
-    radial-gradient(ellipse 35% 100% at 100% 50%, rgba(0, 0, 0, 0.30) 0%, transparent 100%);
+    /* Overall semi-transparent wash */
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.6) 100%),
+    /* Soft left edge */
+    linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, transparent 40%),
+    /* Soft right edge */
+    linear-gradient(270deg, rgba(0, 0, 0, 0.6) 0%, transparent 40%);
 }
 
 /* ===== TEXT OVERLAYS ===== */
