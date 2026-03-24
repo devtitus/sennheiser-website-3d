@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "Overview",   href: "#overview" },
-  { label: "Sound",      href: "#sound" },
+  { label: "Overview", href: "#overview" },
+  { label: "Sound", href: "#sound" },
   { label: "Microphone", href: "#microphone" },
-  { label: "Specs",      href: "#specs" },
+  { label: "Specs", href: "#specs" },
 ];
 
 export default function Navbar() {
@@ -26,17 +26,17 @@ export default function Navbar() {
     >
       <div className="nav-inner">
         {/* Brand */}
-        <a href="#" className="shrink-0 text-[13px] font-medium tracking-[0.02em] text-[#f5f5f7] transition-opacity hover:opacity-70">
+        <a href="#" className="shrink-0 text-[14px] font-medium tracking-[0.02em] text-[#f5f5f7] transition-opacity hover:opacity-70">
           Sennheiser
         </a>
 
         {/* Center nav (desktop) */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-[12px] font-normal text-[#a1a1a6] transition-colors duration-200 hover:text-[#f5f5f7]"
+              className="text-[13px] font-normal text-[#a1a1a6] transition-colors duration-200 hover:text-[#f5f5f7]"
             >
               {link.label}
             </a>
