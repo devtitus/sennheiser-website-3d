@@ -6,7 +6,7 @@ import { useScrollSequence } from "../hooks/useScrollSequence";
 interface ScrollCanvasProps {
   basePath: string;
   frameCount: number;
-  scrollHeight: string; // e.g. "500vh"
+  scrollHeight: string;
   children?: (progress: number) => ReactNode;
 }
 
@@ -17,10 +17,7 @@ export default function ScrollCanvas({
   children,
 }: ScrollCanvasProps) {
   const { containerRef, canvasRef, progress, imagesLoaded, loadProgress } =
-    useScrollSequence({
-      basePath,
-      frameCount,
-    });
+    useScrollSequence({ basePath, frameCount });
 
   return (
     <div
@@ -40,8 +37,7 @@ export default function ScrollCanvas({
                 className="absolute top-0 left-0 h-full rounded-full"
                 style={{
                   width: `${loadProgress * 100}%`,
-                  background:
-                    "linear-gradient(90deg, var(--accent-blue), var(--accent-cyan))",
+                  background: "linear-gradient(90deg, var(--accent-blue), var(--accent-cyan))",
                   transition: "width 0.3s ease-out",
                 }}
               />
@@ -55,12 +51,15 @@ export default function ScrollCanvas({
         {/* Canvas */}
         <canvas
           ref={canvasRef}
-          className="block w-full h-full"
+          className="absolute inset-0 w-full h-full"
           style={{
             opacity: imagesLoaded ? 1 : 0,
             transition: "opacity 0.8s ease-out",
           }}
         />
+
+        {/* Vignette — always on top of canvas, below text */}
+        {imagesLoaded && <div className="canvas-vignette" />}
 
         {/* Text overlay children */}
         {imagesLoaded && children && children(progress)}

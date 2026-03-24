@@ -10,7 +10,12 @@
   --text-body: rgba(255, 255, 255, 0.6);
   --text-muted: rgba(255, 255, 255, 0.4);
   --sennheiser-gray: #666666;
-  --nav-height: 56px;
+  --nav-height: 60px;
+  --page-max: 1920px;
+  --gutter-sm: 20px;
+  --gutter-md: 40px;
+  --gutter-lg: 64px;
+  --gutter-xl: 96px;
 }
 
 @theme inline {
@@ -20,14 +25,14 @@
 }
 
 /* ===== BASE ===== */
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: auto; /* JS handles smooth scroll-linked animation */
+  scroll-behavior: auto;
   background-color: var(--bg-primary);
   color-scheme: dark;
 }
@@ -40,6 +45,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  /* Centre everything for ultra-wide screens */
+  max-width: var(--page-max);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -52,7 +61,6 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   line-height: 1.7;
-  font-size: 1rem;
 }
 
 /* ===== GRADIENT TEXT ===== */
@@ -75,27 +83,44 @@ p {
   background: rgba(5, 5, 5, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              -webkit-backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 
 .glass-nav.scrolled {
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ===== GRADIENT CTA BUTTON ===== */
+/* Nav inner container — centred, capped at 1920 */
+.nav-inner {
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter-sm);
+}
+
+@media (min-width: 768px) { .nav-inner { padding: 0 var(--gutter-md); } }
+@media (min-width: 1280px) { .nav-inner { padding: 0 var(--gutter-lg); } }
+@media (min-width: 1920px) { .nav-inner { padding: 0 var(--gutter-xl); } }
+
+/* ===== BUTTONS ===== */
 .btn-gradient {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
+  padding: 9px 22px;
   font-size: 0.8125rem;
   font-weight: 500;
   color: white;
@@ -106,6 +131,7 @@ p {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: 0.01em;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .btn-gradient:hover {
@@ -118,8 +144,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 40px;
-  font-size: 1rem;
+  padding: 14px 36px;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: white;
   background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
@@ -133,7 +159,7 @@ p {
 
 .btn-primary:hover {
   transform: scale(1.03);
-  box-shadow: 0 0 30px rgba(0, 80, 255, 0.3), 0 0 60px rgba(0, 214, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 80, 255, 0.35), 0 0 60px rgba(0, 214, 255, 0.15);
 }
 
 /* ===== CANVAS SECTION ===== */
@@ -148,80 +174,140 @@ p {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background: var(--bg-primary);
 }
 
 .sticky-canvas-wrapper canvas {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+}
+
+/* ===== VIGNETTE OVERLAY ===== */
+/* Always-on vignette around the canvas edges to boost text legibility */
+.canvas-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  /* Four-edge radial vignette */
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%,   transparent 60%, rgba(5,5,5,0.65) 100%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,  transparent 60%, rgba(5,5,5,0.65) 100%),
+    radial-gradient(ellipse 30% 100% at 0% 50%,   transparent 50%, rgba(5,5,5,0.55) 100%),
+    radial-gradient(ellipse 30% 100% at 100% 50%,  transparent 50%, rgba(5,5,5,0.55) 100%);
 }
 
 /* ===== TEXT OVERLAYS ===== */
+/*
+  The overlay fills the entire sticky viewport.
+  Inside it, .overlay-inner is a max-width centred container with
+  consistent gutters so text never touches the edges.
+  UX law: maintain a clear reading column — typically 45–75 chars wide.
+*/
 .overlay-text {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
   display: flex;
   align-items: center;
-  pointer-events: none;
-  z-index: 10;
-  transition: opacity 0.1s ease-out;
 }
 
+/* Centred content */
 .overlay-text.center {
   justify-content: center;
+}
+.overlay-text.center .overlay-inner {
   text-align: center;
+  align-items: center;
 }
 
+/* Left-aligned — text sits on the left third of the canvas */
 .overlay-text.left {
   justify-content: flex-start;
-  padding-left: 8%;
+}
+.overlay-text.left .overlay-inner {
+  text-align: left;
+  align-items: flex-start;
 }
 
+/* Right-aligned — text sits on the right third */
 .overlay-text.right {
   justify-content: flex-end;
-  padding-right: 8%;
+}
+.overlay-text.right .overlay-inner {
   text-align: right;
+  align-items: flex-end;
+}
+
+/*
+  overlay-inner: the actual reading column.
+  Caps at 480px, always has responsive side gutters.
+*/
+.overlay-inner {
+  display: flex;
+  flex-direction: column;
+  max-width: min(480px, 90vw);
+  padding: 0 var(--gutter-sm);
+  /* Top padding clears the navbar */
+  padding-top: calc(var(--nav-height) + 8px);
+}
+
+/* Left / right offset: push the column toward its edge on wider screens */
+.overlay-text.left  .overlay-inner { margin-left:  max(var(--gutter-sm), 5vw); margin-right: auto; }
+.overlay-text.right .overlay-inner { margin-right: max(var(--gutter-sm), 5vw); margin-left:  auto; }
+
+/* Centred column: no horizontal offset */
+.overlay-text.center .overlay-inner { margin-left: auto; margin-right: auto; }
+
+/* ── Responsive — tablet ── */
+@media (min-width: 640px) {
+  .overlay-inner { padding: 0; padding-top: calc(var(--nav-height) + 8px); }
+  .overlay-text.left  .overlay-inner { margin-left:  max(var(--gutter-md), 6vw); }
+  .overlay-text.right .overlay-inner { margin-right: max(var(--gutter-md), 6vw); }
+}
+
+/* ── Responsive — desktop ── */
+@media (min-width: 1024px) {
+  .overlay-text.left  .overlay-inner { margin-left:  max(var(--gutter-lg), 7vw); }
+  .overlay-text.right .overlay-inner { margin-right: max(var(--gutter-lg), 7vw); }
+}
+
+/* ── Responsive — large desktop ── */
+@media (min-width: 1440px) {
+  .overlay-text.left  .overlay-inner { margin-left:  max(var(--gutter-xl), 8vw); }
+  .overlay-text.right .overlay-inner { margin-right: max(var(--gutter-xl), 8vw); }
+}
+
+/* ── Mobile: collapse left/right to centred ── */
+@media (max-width: 639px) {
+  .overlay-text.left,
+  .overlay-text.right {
+    justify-content: center;
+  }
+  .overlay-text.left  .overlay-inner,
+  .overlay-text.right .overlay-inner {
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--gutter-sm);
+    padding-top: calc(var(--nav-height) + 8px);
+  }
 }
 
 /* ===== KEYFRAMES ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes subtleFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
 }
 
-/* ===== LOADING STATE ===== */
+/* ===== LOADING BAR ===== */
 .loading-bar {
   width: 200px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
   overflow: hidden;
   position: relative;
@@ -230,17 +316,15 @@ p {
 .loading-bar::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  inset: 0;
   width: 40%;
   background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
   animation: shimmer 1.5s infinite;
 }
 
-/* ===== SPECS GRID ===== */
+/* ===== SPEC CARD ===== */
 .spec-card {
-  padding: 32px;
+  padding: 28px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
@@ -253,39 +337,21 @@ p {
   transform: translateY(-2px);
 }
 
-/* ===== SUBTLE AMBIENT GLOW ===== */
-.ambient-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 80, 255, 0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+/* ===== SECTION CONTAINER ===== */
+/* Standard page gutter wrapper for static sections */
+.page-container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-left:  var(--gutter-sm);
+  padding-right: var(--gutter-sm);
 }
+@media (min-width: 768px)  { .page-container { padding-left: var(--gutter-md); padding-right: var(--gutter-md); } }
+@media (min-width: 1280px) { .page-container { padding-left: var(--gutter-lg); padding-right: var(--gutter-lg); } }
+@media (min-width: 1920px) { .page-container { padding-left: var(--gutter-xl); padding-right: var(--gutter-xl); } }
 
 /* ===== SCROLLBAR ===== */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .overlay-text.left,
-  .overlay-text.right {
-    padding-left: 6%;
-    padding-right: 6%;
-    justify-content: center;
-    text-align: center;
-  }
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
