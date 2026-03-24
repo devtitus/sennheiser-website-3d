@@ -30,8 +30,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 /* ===== BASE ===== */
@@ -291,7 +289,7 @@ p {
 .overlay-inner {
   display: flex;
   flex-direction: column;
-  max-width: min(500px, 88vw);
+  max-width: min(650px, 88vw);
   gap: 0;
   padding: 0 var(--gutter-sm);
 }

@@ -30,8 +30,8 @@ function TextOverlay({
   const ty = o < 1 && progress < fadeIn ? (1 - o) * 20 : 0;
   const tx =
     align === "left" ? (progress < fadeIn ? -(1 - o) * 20 : 0)
-    : align === "right" ? (progress < fadeIn ? (1 - o) * 20 : 0)
-    : 0;
+      : align === "right" ? (progress < fadeIn ? (1 - o) * 20 : 0)
+        : 0;
 
   if (o <= 0) return null;
 
@@ -84,7 +84,7 @@ export default function HeroSection() {
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Every detail,<br />purpose-built.
               </h2>
-              <div className="mt-5 space-y-4">
+              <div className="mt-5 space-y-2">
                 {[
                   "38mm angled transducers for detailed, immersive reproduction.",
                   "Velour ear cushions for hours of fatigue-free listening.",

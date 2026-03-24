@@ -49,7 +49,7 @@ export default function MicSection() {
               <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Engineered for clarity.
               </h3>
-              <div className="mt-5 space-y-4">
+              <div className="mt-5 space-y-2">
                 {[
                   "Studio-grade condenser capsule with wide frequency response.",
                   "Noise-rejecting windscreen minimizes background interference.",

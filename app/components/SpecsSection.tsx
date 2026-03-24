@@ -1,13 +1,13 @@
 export default function SpecsSection() {
   const specs = [
-    { label: "Transducer",         value: "Dynamic, open-back",  detail: "Proprietary Sennheiser" },
-    { label: "Frequency Response",  value: "14 – 26,000 Hz",     detail: "Extended audiophile range" },
-    { label: "Impedance",           value: "50 Ω",               detail: "All-source optimized" },
-    { label: "Sound Pressure",      value: "108 dB",             detail: "1 kHz / 1 Vrms" },
-    { label: "Driver Size",         value: "38 mm",              detail: "Angled transducers" },
-    { label: "Cable",               value: "3 m detachable",     detail: "Locking connector" },
-    { label: "Connector",           value: "3.5 mm",             detail: "6.3 mm adapter included" },
-    { label: "Weight",              value: "~275 g",             detail: "Without cable" },
+    { label: "Transducer", value: "Dynamic, open-back", detail: "Proprietary Sennheiser" },
+    { label: "Frequency Response", value: "14 – 26,000 Hz", detail: "Extended audiophile range" },
+    { label: "Impedance", value: "50 Ω", detail: "All-source optimized" },
+    { label: "Sound Pressure", value: "108 dB", detail: "1 kHz / 1 Vrms" },
+    { label: "Driver Size", value: "38 mm", detail: "Angled transducers" },
+    { label: "Cable", value: "3 m detachable", detail: "Locking connector" },
+    { label: "Connector", value: "3.5 mm", detail: "6.3 mm adapter included" },
+    { label: "Weight", value: "~275 g", detail: "Without cable" },
   ];
 
   return (
@@ -25,11 +25,11 @@ export default function SpecsSection() {
         </div>
 
         {/* Specs grid */}
-        <div className="mx-auto max-w-[960px] grid grid-cols-1 gap-px rounded-2xl overflow-hidden border sm:grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--border-subtle)", background: "var(--border-subtle)" }}>
+        <div className="mx-auto max-w-full grid grid-cols-1 gap-4 overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
           {specs.map((spec) => (
             <div
               key={spec.label}
-              className="flex flex-col justify-between p-6 sm:p-7 transition-colors duration-300 hover:bg-[#1d1d1f]"
+              className="flex flex-col justify-between p-6 sm:p-7 transition-colors duration-300 hover:bg-[#1d1d1f] rounded-2xl border border-white/10"
               style={{ background: "var(--bg-elevated)" }}
             >
               <p className="text-[10px] font-medium tracking-[0.06em] uppercase text-[#6e6e73]">

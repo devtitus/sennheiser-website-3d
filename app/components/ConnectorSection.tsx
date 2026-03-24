@@ -48,7 +48,7 @@ export default function ConnectorSection() {
               <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Built to last.
               </h3>
-              <div className="mt-5 space-y-4">
+              <div className="mt-5 space-y-2">
                 {[
                   "Gold-plated 3.5mm jack ensures reliable, low-resistance contact.",
                   "Detachable cable with locking connector — replace, upgrade, or extend.",
