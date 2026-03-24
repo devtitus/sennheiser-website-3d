@@ -161,8 +161,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 30px;
-  font-size: 1.0625rem;
+  padding: 10px 22px;
+  font-size: 1rem;
   font-weight: 400;
   color: #000;
   background: var(--text-primary);
@@ -182,8 +182,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 30px;
-  font-size: 1.0625rem;
+  padding: 10px 22px;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--text-primary);
   background: transparent;

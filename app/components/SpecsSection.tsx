@@ -48,7 +48,7 @@ export default function SpecsSection() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 sm:mt-24 flex flex-col items-center gap-5 text-center">
+        <div className="mt-20 sm:mt-24 flex flex-col items-center gap-10 text-center">
           <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
             Ready to experience it?
           </h3>
