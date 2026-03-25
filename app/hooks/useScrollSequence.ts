@@ -22,37 +22,6 @@ export function useScrollSequence({
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
 
-  // Preload all images
-  useEffect(() => {
-    let loadedCount = 0;
-    const images: HTMLImageElement[] = new Array(frameCount);
-
-    const onLoad = () => {
-      loadedCount++;
-      setLoadProgress(loadedCount / frameCount);
-      if (loadedCount === frameCount) {
-        imagesRef.current = images;
-        setImagesLoaded(true);
-        // Draw first frame
-        drawFrame(0);
-      }
-    };
-
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      const frameNum = String(i + 1).padStart(padLength, "0");
-      img.src = `${basePath}/ezgif-frame-${frameNum}.jpg`;
-      img.onload = onLoad;
-      img.onerror = onLoad; // Count errors to avoid hanging
-      images[i] = img;
-    }
-
-    return () => {
-      imagesRef.current = [];
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [basePath, frameCount, padLength]);
-
   // Draw a specific frame to canvas
   const drawFrame = useCallback(
     (frameIndex: number) => {
@@ -60,11 +29,36 @@ export function useScrollSequence({
       const images = imagesRef.current;
       if (!canvas || !images.length) return;
 
+      // Find nearest loaded frame if exact one isn't ready
+      let bestIndex = frameIndex;
+      if (!images[bestIndex] || !images[bestIndex].complete || !images[bestIndex].naturalWidth) {
+        let found = false;
+        // Check surrounding frames (expand search outward)
+        for (let offset = 1; offset < frameCount; offset++) {
+          if (frameIndex - offset >= 0) {
+            const i = frameIndex - offset;
+            if (images[i] && images[i].complete && images[i].naturalWidth) {
+              bestIndex = i;
+              found = true;
+              break;
+            }
+          }
+          if (frameIndex + offset < frameCount) {
+            const i = frameIndex + offset;
+            if (images[i] && images[i].complete && images[i].naturalWidth) {
+              bestIndex = i;
+              found = true;
+              break;
+            }
+          }
+        }
+      }
+
+      const img = images[bestIndex];
+      if (!img || !img.complete || !img.naturalWidth) return;
+
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) return;
-
-      const img = images[frameIndex];
-      if (!img || !img.complete || !img.naturalWidth) return;
 
       // Set canvas size to match viewport
       const dpr = window.devicePixelRatio || 1;
@@ -103,8 +97,85 @@ export function useScrollSequence({
 
       ctx.drawImage(img, drawX, drawY, drawW, drawH);
     },
-    []
+    [frameCount]
   );
+
+  // Preload all images using progressive/batched strategy
+  useEffect(() => {
+    let isCancelled = false;
+    let loadedCount = 0;
+    const images: HTMLImageElement[] = new Array(frameCount);
+    imagesRef.current = images;
+
+    const loadImage = (index: number): Promise<HTMLImageElement> => {
+      return new Promise((resolve) => {
+        if (images[index]) return resolve(images[index]);
+        const img = new Image();
+        const frameNum = String(index + 1).padStart(padLength, "0");
+        img.src = `${basePath}/ezgif-frame-${frameNum}.jpg`;
+        img.onload = () => {
+          images[index] = img;
+          resolve(img);
+        };
+        img.onerror = () => {
+          images[index] = img; // store to avoid retrying endlessly
+          resolve(img);
+        };
+      });
+    };
+
+    const loadImagesInBatches = async () => {
+      // 1. Load frame 0 immediately for instant First Paint
+      await loadImage(0);
+      if (isCancelled) return;
+      
+      setImagesLoaded(true);
+      loadedCount++;
+      setLoadProgress(loadedCount / frameCount);
+      drawFrame(0);
+
+      // 2. Load "skeleton" (every 10th frame) for fast scrub
+      const skeletonIndices: number[] = [];
+      for (let i = 0; i < frameCount; i += 10) {
+        if (!images[i]) skeletonIndices.push(i);
+      }
+      
+      const loadAndTrack = async (index: number) => {
+        if (images[index]) return;
+        await loadImage(index);
+        loadedCount++;
+        if (!isCancelled) {
+          setLoadProgress(loadedCount / frameCount);
+          // Redraw if the user's current frame is near to visually sharpen
+          if (Math.abs(currentFrameRef.current - index) <= 10) {
+             drawFrame(currentFrameRef.current);
+          }
+        }
+      };
+
+      await Promise.all(skeletonIndices.map(loadAndTrack));
+      if (isCancelled) return;
+
+      // 3. Background-fill remaining frames sequentially in batches of 5
+      const remaining: number[] = [];
+      for (let i = 0; i < frameCount; i++) {
+        if (!images[i]) remaining.push(i);
+      }
+      
+      for (let i = 0; i < remaining.length; i += 5) {
+        if (isCancelled) return;
+        const batch = remaining.slice(i, i + 5);
+        await Promise.all(batch.map(loadAndTrack));
+        if (!isCancelled) drawFrame(currentFrameRef.current);
+      }
+    };
+
+    loadImagesInBatches();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [basePath, frameCount, padLength, drawFrame]);
 
   // Scroll handler
   useEffect(() => {

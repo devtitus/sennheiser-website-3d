@@ -29,7 +29,7 @@ export default function ScrollCanvas({
         {/* Loading state */}
         {!imagesLoaded && (
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black">
-            <div className="mb-4 text-[11px] font-medium tracking-[0.08em] uppercase text-[#6e6e73]">
+            <div className="mb-4 text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-white/50">
               Loading experience
             </div>
             <div className="loading-bar">
@@ -42,7 +42,7 @@ export default function ScrollCanvas({
                 }}
               />
             </div>
-            <div className="mt-3 text-[11px] text-[#48484a]">
+            <div className="mt-3 text-[clamp(11px,1vw,14px)] text-white/50">
               {Math.round(loadProgress * 100)}%
             </div>
           </div>
@@ -52,6 +52,7 @@ export default function ScrollCanvas({
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full"
+          aria-label="Interactive 3D product showcase"
           style={{
             opacity: imagesLoaded ? 1 : 0,
             transition: "opacity 0.8s ease-out",
