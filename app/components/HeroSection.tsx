@@ -53,24 +53,24 @@ export default function HeroSection() {
               <h1 className="text-[clamp(2.5rem,7vw,5.5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-[#f5f5f7]">
                 Sennheiser HD&nbsp;559
               </h1>
-              <p className="mt-3 text-[clamp(1rem,2vw,1.375rem)] font-normal text-[#a1a1a6]">
+              <p className="mt-3 text-[clamp(0.938rem,2vw,1.25rem)] font-normal text-white/80">
                 Sound, unleashed.
               </p>
             </TextOverlay>
 
             {/* Beat 2 — Engineering (12–35%) */}
             <TextOverlay progress={progress} start={0.12} end={0.35} align="left">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 Engineering
               </p>
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Precision-engineered<br />for pure sound.
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 Proprietary transducer technology delivers exceptional clarity,
                 depth, and spatial accuracy across the full frequency spectrum.
               </p>
-              <p className="mt-3 text-[15px] leading-[1.58] text-[#6e6e73]">
+              <p className="mt-3 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/55">
                 Open-back acoustic design eliminates resonance, creating a natural
                 soundstage that places you inside the music.
               </p>
@@ -78,7 +78,7 @@ export default function HeroSection() {
 
             {/* Beat 3 — Anatomy (35–60%) */}
             <TextOverlay progress={progress} start={0.35} end={0.6} align="right">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 Anatomy
               </p>
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
@@ -91,8 +91,8 @@ export default function HeroSection() {
                   "Lightweight headband with padded leatherette for balanced pressure.",
                 ].map((copy) => (
                   <div key={copy} className="flex items-start gap-3">
-                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#48484a]" />
-                    <p className="text-[15px] leading-[1.47] text-[#a1a1a6]">{copy}</p>
+                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-white/60" />
+                    <p className="text-[clamp(14px,1.1vw,16px)] leading-[1.47] text-white/80">{copy}</p>
                   </div>
                 ))}
               </div>
@@ -100,17 +100,17 @@ export default function HeroSection() {
 
             {/* Beat 4 — Sound (60–85%) */}
             <TextOverlay progress={progress} start={0.6} end={0.85} align="left">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 Sound
               </p>
               <h2 id="sound" className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Audiophile sound,<br />everyday comfort.
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 High-performance drivers unlock detail, depth, and texture in
                 every track — from delicate acoustic to driving bass.
               </p>
-              <p className="mt-3 text-[15px] leading-[1.58] text-[#6e6e73]">
+              <p className="mt-3 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/55">
                 The open-back design delivers a wide, speaker-like soundstage
                 that audiophiles demand, without the fatigue of isolation.
               </p>
@@ -121,7 +121,7 @@ export default function HeroSection() {
               <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.025em] gradient-text">
                 Hear everything.
               </h2>
-              <p className="mt-3 text-[clamp(0.94rem,1.5vw,1.19rem)] font-normal text-[#86868b]">
+              <p className="mt-3 text-[clamp(1rem,1.5vw,1.375rem)] font-normal text-white/80">
                 Designed for immersion. Crafted for comfort.
               </p>
               <a href="#discover" className="btn-primary pointer-events-auto mt-8">

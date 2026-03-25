@@ -33,13 +33,13 @@ export default function FullProductSection() {
         {(progress) => (
           <>
             <TextOverlay progress={progress} start={0} end={0.4} align="center">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 The Complete Experience
               </p>
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 HD 559 with microphone.
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 Audiophile headphones and broadcast mic, unified in one premium package.
               </p>
             </TextOverlay>
@@ -48,7 +48,7 @@ export default function FullProductSection() {
               <h2 className="text-[clamp(2rem,5vw,4rem)] font-semibold tracking-[-0.03em] leading-[1.1] gradient-text">
                 Hear everything.<br />Feel nothing else.
               </h2>
-              <p className="mt-4 text-[clamp(0.94rem,1.5vw,1.19rem)] font-normal text-[#86868b]">
+              <p className="mt-4 text-[clamp(1rem,1.2vw,1.375rem)] font-normal text-white/70">
                 Sennheiser HD 559. Designed for immersion, crafted for comfort.
               </p>
               <div className="pointer-events-auto mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">

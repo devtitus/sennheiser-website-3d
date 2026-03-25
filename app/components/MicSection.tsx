@@ -34,19 +34,19 @@ export default function MicSection() {
         {(progress) => (
           <>
             <TextOverlay progress={progress} start={0} end={0.25} align="center">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 Microphone
               </p>
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Broadcast-quality voice.
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 A detachable boom microphone that captures your voice with studio clarity.
               </p>
             </TextOverlay>
 
             <TextOverlay progress={progress} start={0.25} end={0.6} align="right">
-              <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Engineered for clarity.
               </h3>
               <div className="mt-5 space-y-2">
@@ -56,18 +56,18 @@ export default function MicSection() {
                   "Flexible boom arm positions precisely where you need it.",
                 ].map((copy) => (
                   <div key={copy} className="flex items-start gap-3">
-                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#48484a]" />
-                    <p className="text-[15px] leading-[1.47] text-[#a1a1a6]">{copy}</p>
+                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-white/60" />
+                    <p className="text-[clamp(14px,1.1vw,16px)] leading-[1.47] text-white/80">{copy}</p>
                   </div>
                 ))}
               </div>
             </TextOverlay>
 
             <TextOverlay progress={progress} start={0.6} end={1} align="left">
-              <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Detach when you don&apos;t need it.
               </h3>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 The boom microphone connects via a secure locking mechanism.
                 Remove it for pure listening, attach it for calls and gaming — seamlessly.
               </p>

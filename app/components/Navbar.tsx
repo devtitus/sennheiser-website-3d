@@ -45,7 +45,7 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex shrink-0 items-center gap-3">
-          <a href="#discover" className="btn-nav hidden sm:inline-flex">
+          <a href="#discover" className="btn-nav invisible lg:visible">
             Explore
           </a>
 

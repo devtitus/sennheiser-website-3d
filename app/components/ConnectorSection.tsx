@@ -33,19 +33,19 @@ export default function ConnectorSection() {
         {(progress) => (
           <>
             <TextOverlay progress={progress} start={0} end={0.3} align="center">
-              <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+              <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-white/80">
                 Connectivity
               </p>
               <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Engineered connection.
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.58] text-[#a1a1a6]">
+              <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
                 Every signal path is optimized for zero-loss audio transmission.
               </p>
             </TextOverlay>
 
             <TextOverlay progress={progress} start={0.3} end={0.7} align="left">
-              <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Built to last.
               </h3>
               <div className="mt-5 space-y-2">
@@ -55,8 +55,8 @@ export default function ConnectorSection() {
                   "OFC copper wiring for full-spectrum signal integrity.",
                 ].map((copy) => (
                   <div key={copy} className="flex items-start gap-3">
-                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#48484a]" />
-                    <p className="text-[15px] leading-[1.47] text-[#a1a1a6]">{copy}</p>
+                    <div className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-white/60" />
+                    <p className="text-[clamp(14px,1.1vw,16px)] leading-[1.47] text-white/80">{copy}</p>
                   </div>
                 ))}
               </div>
@@ -66,7 +66,7 @@ export default function ConnectorSection() {
               <h3 className="text-[clamp(1.5rem,3vw,2.5rem)] font-semibold tracking-[-0.02em] gradient-text-subtle">
                 Zero compromise, every note.
               </h3>
-              <p className="mt-3 text-[15px] text-[#6e6e73]">
+              <p className="mt-3 text-[clamp(14px,1.1vw,16px)] text-white/80">
                 From source to driver — uninterrupted audio fidelity.
               </p>
             </TextOverlay>

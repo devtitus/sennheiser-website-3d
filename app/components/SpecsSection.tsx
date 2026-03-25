@@ -16,7 +16,7 @@ export default function SpecsSection() {
 
         {/* Header */}
         <div className="text-center mb-16 sm:mb-20">
-          <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#86868b]">
+          <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
             Technical Specifications
           </p>
           <h2 className="mt-3 text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.025em] text-[#f5f5f7]">
@@ -29,17 +29,17 @@ export default function SpecsSection() {
           {specs.map((spec) => (
             <div
               key={spec.label}
-              className="flex flex-col justify-between p-6 sm:p-7 transition-colors duration-300 hover:bg-[#1d1d1f] rounded-2xl border border-white/10"
+              className="flex flex-col justify-between p-6 sm:p-7 lg:p-8 transition-colors duration-300 hover:bg-[#1d1d1f] rounded-2xl border border-white/10"
               style={{ background: "var(--bg-elevated)" }}
             >
-              <p className="text-[10px] font-medium tracking-[0.06em] uppercase text-[#6e6e73]">
+              <p className="text-[clamp(10px,0.8vw,12px)] font-medium tracking-[0.06em] uppercase text-[#6e6e73]">
                 {spec.label}
               </p>
               <div className="mt-6">
-                <p className="text-[22px] font-semibold tracking-[-0.02em] leading-tight text-[#f5f5f7]">
+                <p className="text-[clamp(20px,1.6vw,26px)] font-semibold tracking-[-0.02em] leading-tight text-[#f5f5f7]">
                   {spec.value}
                 </p>
-                <p className="mt-1 text-[13px] text-[#6e6e73]">
+                <p className="mt-1 text-[clamp(13px,1vw,15px)] text-[#6e6e73]">
                   {spec.detail}
                 </p>
               </div>
@@ -49,7 +49,7 @@ export default function SpecsSection() {
 
         {/* CTA */}
         <div className="mt-20 sm:mt-24 flex flex-col items-center gap-10 text-center">
-          <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
+          <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
             Ready to experience it?
           </h3>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
