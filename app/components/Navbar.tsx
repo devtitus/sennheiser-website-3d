@@ -1,21 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const navLinks = [
-  { label: "Overview", href: "#overview" },
-  { label: "Sound", href: "#sound" },
-  { label: "Microphone", href: "#microphone" },
-  { label: "Specs", href: "#specs" },
+  { label: "Overview", href: "/overview", sectionId: "overview" },
+  { label: "Microphone", href: "/microphone", sectionId: "microphone" },
+  { label: "Sound", href: "/sound", sectionId: "sound" },
+  { label: "Specs", href: "/specs", sectionId: "specs" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const scrollToSection = useCallback((sectionId: string, pushUrl: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", pushUrl);
+    }
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    // On mount, if URL matches a section, scroll to it
+    const path = window.location.pathname;
+    const match = navLinks.find((l) => l.href === path);
+    if (match) {
+      setTimeout(() => {
+        const el = document.getElementById(match.sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -36,6 +55,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
+              onClick={(e) => { e.preventDefault(); scrollToSection(link.sectionId, link.href); }}
               className="text-[clamp(13px,1vw,14px)] font-normal text-white/60 transition-colors duration-200 hover:text-white/90"
             >
               {link.label}
@@ -45,7 +65,11 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex shrink-0 items-center gap-3">
-          <a href="#discover" className="btn-nav invisible lg:visible">
+          <a
+            href="/discover"
+            onClick={(e) => { e.preventDefault(); scrollToSection("discover", "/discover"); }}
+            className="btn-nav invisible lg:visible"
+          >
             Explore
           </a>
 
@@ -72,7 +96,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => { e.preventDefault(); setMobileOpen(false); scrollToSection(link.sectionId, link.href); }}
                 className="py-3 text-[clamp(14px,1.1vw,16px)] font-normal text-white/70 transition-colors hover:text-white/90 border-b"
 
                 style={{ borderColor: "var(--border-subtle)" }}
@@ -81,9 +105,9 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#discover"
+              href="/discover"
               className="btn-nav mt-4 text-center"
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => { e.preventDefault(); setMobileOpen(false); scrollToSection("discover", "/discover"); }}
             >
               Explore HD 559
             </a>

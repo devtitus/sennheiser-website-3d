@@ -103,7 +103,7 @@ export default function HeroSection() {
               <p className="text-[clamp(11px,1vw,14px)] font-medium tracking-[0.08em] uppercase text-[#86868b]">
                 Sound
               </p>
-              <h2 id="sound" className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
+              <h2 className="mt-3 text-[clamp(1.75rem,4vw,3rem)] font-semibold tracking-[-0.02em] text-[#f5f5f7]">
                 Audiophile sound,<br />everyday comfort.
               </h2>
               <p className="mt-4 text-[clamp(14px,1.1vw,16px)] leading-[1.58] text-white/80">
@@ -124,7 +124,7 @@ export default function HeroSection() {
               <p className="mt-3 text-[clamp(1rem,1.5vw,1.375rem)] font-normal text-white/80">
                 Designed for immersion. Crafted for comfort.
               </p>
-              <a href="#discover" className="btn-primary pointer-events-auto mt-8">
+              <a href="/discover" onClick={(e) => { e.preventDefault(); document.getElementById("discover")?.scrollIntoView({ behavior: "smooth" }); window.history.pushState(null, "", "/discover"); }} className="btn-primary pointer-events-auto mt-8">
                 Discover HD 559
               </a>
             </TextOverlay>

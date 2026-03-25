@@ -28,7 +28,7 @@ function TextOverlay({
 
 export default function ConnectorSection() {
   return (
-    <section>
+    <section id="sound">
       <ScrollCanvas basePath="/con-vid" frameCount={116} scrollHeight="350vh">
         {(progress) => (
           <>

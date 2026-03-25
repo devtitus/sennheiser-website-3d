@@ -52,10 +52,10 @@ export default function FullProductSection() {
                 Sennheiser HD 559. Designed for immersion, crafted for comfort.
               </p>
               <div className="pointer-events-auto mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
-                <a href="#specs" className="btn-primary w-full sm:w-auto text-center">
+                <a href="/specs" onClick={(e) => { e.preventDefault(); document.getElementById("specs")?.scrollIntoView({ behavior: "smooth" }); window.history.pushState(null, "", "/specs"); }} className="btn-primary w-full sm:w-auto text-center">
                   Buy HD 559
                 </a>
-                <a href="#specs" className="link-arrow">
+                <a href="/specs" onClick={(e) => { e.preventDefault(); document.getElementById("specs")?.scrollIntoView({ behavior: "smooth" }); window.history.pushState(null, "", "/specs"); }} className="link-arrow">
                   See full specs
                 </a>
               </div>
