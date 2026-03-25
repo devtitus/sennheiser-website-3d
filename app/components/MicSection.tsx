@@ -30,7 +30,7 @@ function TextOverlay({
 export default function MicSection() {
   return (
     <section id="microphone">
-      <ScrollCanvas basePath="/mic" frameCount={169} scrollHeight="400vh">
+      <ScrollCanvas basePath="/mic" frameCount={169} scrollHeight="400vh" focusX={0.2}>
         {(progress) => (
           <>
             <TextOverlay progress={progress} start={0} end={0.25} align="center">

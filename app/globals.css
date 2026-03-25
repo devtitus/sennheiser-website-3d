@@ -245,11 +245,11 @@ p {
   /* Subtle full-screen tint for text legibility + soft edge darkening */
   background:
     /* Overall semi-transparent wash */
-    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0.6) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.6) 100%),
     /* Soft left edge */
-    linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, transparent 40%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, transparent 40%),
     /* Soft right edge */
-    linear-gradient(270deg, rgba(0, 0, 0, 0.6) 0%, transparent 40%);
+    linear-gradient(270deg, rgba(0, 0, 0, 0.5) 0%, transparent 40%);
 }
 
 /* ===== TEXT OVERLAYS ===== */

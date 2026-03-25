@@ -6,12 +6,14 @@ interface UseScrollSequenceOptions {
   basePath: string;
   frameCount: number;
   padLength?: number;
+  focusX?: number;
 }
 
 export function useScrollSequence({
   basePath,
   frameCount,
   padLength = 3,
+  focusX = 0.5,
 }: UseScrollSequenceOptions) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -85,7 +87,7 @@ export function useScrollSequence({
         // Image is wider — fit by height
         drawH = rect.height;
         drawW = drawH * imgRatio;
-        drawX = (rect.width - drawW) / 2;
+        drawX = (rect.width - drawW) * focusX;
         drawY = 0;
       } else {
         // Image is taller — fit by width
@@ -177,7 +179,7 @@ export function useScrollSequence({
     return () => {
       isCancelled = true;
     };
-  }, [basePath, frameCount, padLength, drawFrame]);
+  }, [basePath, frameCount, padLength, focusX, drawFrame]);
 
   // Scroll handler
   useEffect(() => {

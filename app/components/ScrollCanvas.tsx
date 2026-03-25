@@ -7,6 +7,7 @@ interface ScrollCanvasProps {
   basePath: string;
   frameCount: number;
   scrollHeight: string;
+  focusX?: number;
   children?: (progress: number) => ReactNode;
 }
 
@@ -14,10 +15,11 @@ export default function ScrollCanvas({
   basePath,
   frameCount,
   scrollHeight,
+  focusX,
   children,
 }: ScrollCanvasProps) {
   const { containerRef, canvasRef, progress, imagesLoaded, loadProgress } =
-    useScrollSequence({ basePath, frameCount });
+    useScrollSequence({ basePath, frameCount, focusX });
 
   return (
     <div
