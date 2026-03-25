@@ -26,7 +26,7 @@ export default function Navbar() {
     >
       <div className="nav-inner">
         {/* Brand */}
-        <a href="#" className="shrink-0 text-[14px] font-medium tracking-[0.02em] text-[#f5f5f7] transition-opacity hover:opacity-70">
+        <a href="#" className="shrink-0 text-[clamp(14px,1.1vw,16px)] uppercase font-semibold tracking-[0.02em] text-white/80 transition-opacity hover:opacity-100">
           Sennheiser
         </a>
 
@@ -36,7 +36,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-[13px] font-normal text-[#a1a1a6] transition-colors duration-200 hover:text-[#f5f5f7]"
+              className="text-[clamp(13px,1vw,14px)] font-normal text-white/60 transition-colors duration-200 hover:text-white/90"
             >
               {link.label}
             </a>
@@ -73,7 +73,8 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 text-[15px] font-normal text-[#a1a1a6] transition-colors hover:text-[#f5f5f7] border-b"
+                className="py-3 text-[clamp(14px,1.1vw,16px)] font-normal text-white/70 transition-colors hover:text-white/90 border-b"
+
                 style={{ borderColor: "var(--border-subtle)" }}
               >
                 {link.label}
