@@ -125,21 +125,14 @@ export function useScrollSequence({
     };
 
     const loadImagesInBatches = async () => {
-      // 1. Load frame 0 immediately for instant First Paint
+      // 1. Load frame 0 immediately to compute dimensions and draw First Paint
       await loadImage(0);
       if (isCancelled) return;
       
-      setImagesLoaded(true);
       loadedCount++;
       setLoadProgress(loadedCount / frameCount);
       drawFrame(0);
 
-      // 2. Load "skeleton" (every 10th frame) for fast scrub
-      const skeletonIndices: number[] = [];
-      for (let i = 0; i < frameCount; i += 10) {
-        if (!images[i]) skeletonIndices.push(i);
-      }
-      
       const loadAndTrack = async (index: number) => {
         if (images[index]) return;
         await loadImage(index);
@@ -153,8 +146,17 @@ export function useScrollSequence({
         }
       };
 
+      // 2. Load "skeleton" (every 5th frame) for smooth initial scrub
+      const skeletonIndices: number[] = [];
+      for (let i = 0; i < frameCount; i += 5) {
+        if (!images[i]) skeletonIndices.push(i);
+      }
+
       await Promise.all(skeletonIndices.map(loadAndTrack));
       if (isCancelled) return;
+
+      // Unhide the canvas now that we have a solid structural skeleton (20% of frames loaded)
+      setImagesLoaded(true);
 
       // 3. Background-fill remaining frames sequentially in batches of 5
       const remaining: number[] = [];
